@@ -1,0 +1,53 @@
+//props: immutable form of data passed down; data that cna be passed down to a child component
+
+//state: can be changed,we can update
+//hooks: we use React Hooks to update our state.
+//hooks: set of functions to set, modify our state
+
+//useState() is a React Hook -> set the value of our state, update
+
+//let [notes<array to hold>,setNotes<setter method>] =useState(['Wash Car','Build Project','Workout']) ?optionl paramms
+
+//useEffect() for managing componient lifecycle covering the following(componentDidMount(), componentDidUpdate(), componentWillUnmount())
+//SYNTAX: useEffect(()=>{},[array of dependencies]); fires everytime for did update
+
+//if added empty array, the fire off just the first time
+//if not the useEffect(()=>{}) then fire off on every single update
+
+//run on unmount to tear down-> (()=>{return()=>{}},[])
+
+//can also be written as strcuctured notice the props.note.body
+
+// const ListItem = (props) => {
+//   console.log(props);
+//   return (
+//     <div>
+//       <h3>{props.note.body}</h3>
+//     </div>
+//   );
+// };
+
+
+//Always remember you can only return one parent or div. So structure it like that
+
+  useEffect(() => {
+    getNotes();
+  }, []); //cannot add async here
+
+//if you don't add [] it burst with request sending, check network tab to check its effect. it fires for every change
+
+response = await fetch("http://localhost:<portnumber>/notes/"); //fetch is going to get our notes
+
+
+import ArrowLeft from "../assets/arrow-left.svg?react"; //as per svgr doc .svg?react treats the svg as ReactComponent
+
+----------instead of use history----------
+  let { id } = useParams(); //remember to destructure it
+  let navigate = useNavigate();
+  //let note = notes.find((note) => note.id === Number(id));
+
+
+-----------
+//setNote({ ...note, body: e.target.value }); //spread operator to update original note
+------------
+{/* we need to add a function {()=>{}}  onChange={()=>{}} so that it does not fire immediately*/}

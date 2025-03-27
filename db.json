@@ -1,0 +1,21 @@
+{
+  "notes": [
+    {
+      "id": 1,
+      "body": "Todays Agenda\n\n- Walk Dog\n- Feed fish\n- Play basketball\n- Eat a salad\n- Don't!!\n- Eat",
+      "updated": "2025-03-27T19:16:16.275Z",
+      "created": "2021-07-13T21:54:16.235392Z"
+    },
+    {
+      "id": 2,
+      "body": "Bob from bar down the \n\n- Take out trash\n- Eat food",
+      "updated": "2025-03-27T19:16:21.081Z",
+      "created": "2021-07-13T00:17:13.289897Z"
+    },
+    {
+      "body": "New Note\nUpdate",
+      "updated": "2025-03-27T19:16:55.811Z",
+      "id": 3
+    }
+  ]
+}
