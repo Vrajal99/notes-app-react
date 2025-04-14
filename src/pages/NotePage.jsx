@@ -4,13 +4,16 @@ import { useParams, useNavigate } from "react-router"; //to get params
 //import notes from "../assets/data";
 import { Link } from "react-router";
 import ArrowLeft from "../assets/arrow-left.svg?react"; //as per svgr doc .svg?react treats the svg as ReactComponent
-
+import { summarizeNotes } from "../components/summarizer/summarizer";
 const NotePage = () => {
   let { id } = useParams(); //remember to destructure it
   let navigate = useNavigate();
   //let note = notes.find((note) => note.id === Number(id));
 
   let [note, setNote] = useState(null);
+  const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [showSummary, setShowSummary] = useState(true);
 
   useEffect(() => {
     getNote();
@@ -66,6 +69,23 @@ const NotePage = () => {
     navigate(-1);
   };
 
+  const handleSummarize = async () => {
+    if (!note?.body) return;
+
+    setLoading(true);
+    setShowSummary(true);
+
+    try {
+      const result = await summarizeNotes([note.body]);
+      setSummary(result);
+    } catch (error) {
+      console.error("Error summarizing:", error);
+      setSummary("Failed to summarize the note.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="note">
       <div className="note-header">
@@ -89,6 +109,24 @@ const NotePage = () => {
       ></textarea>
 
       {/* we need to add a function above onChange={()=>{}} so that it does not fire immediately*/}
+      {/* ✅ New modern summarize button */}
+      <button onClick={handleSummarize} className="summarize-button">
+        {loading ? "Summarizing..." : "Summarize Note"}
+      </button>
+
+      {loading && <div className="spinner"></div>}
+
+      {summary && (
+        <div className="note-summary">
+          <h4
+            onClick={() => setShowSummary(!showSummary)}
+            style={{ cursor: "pointer" }}
+          >
+            {showSummary ? "▼ Hide Summary" : "▶ Show Summary"}
+          </h4>
+          {showSummary && <p>{summary}</p>}
+        </div>
+      )}
     </div>
   );
 };
